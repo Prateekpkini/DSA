@@ -8,6 +8,7 @@ int main()
     for(int i=0;i<4;i++){
         scanf("%d",&ptr[i]);   
     }
+    printf("\n%d\n",sizeof(ptr));
     for(int i=0;i<4;i++){
         printf(" %d ",ptr[i]);
     }
@@ -16,6 +17,7 @@ int main()
     for(int i=0;i<8;i++){
         scanf("%d",&ptr[i]);   
     }
+    printf("\n%d\n",sizeof(ptr));
     for(int i=0;i<8;i++){
         printf(" %d ",ptr[i]);
     }   
