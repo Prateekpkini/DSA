@@ -9,7 +9,6 @@ int main(){
     printf("Enter the position to delete element:");
     int pos;
     scanf("%d",&pos);
-    //deletion at given position
     for(int i=pos-1;i<n-1;i++){
         arr[i]=arr[i+1];
     }
