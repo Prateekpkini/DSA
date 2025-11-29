@@ -1,5 +1,5 @@
 #include<stdio.h>
-void insertionsort(int arr[],int n){
+void bubblesort(int arr[],int n){
     int i,j,temp;
     for(i=0;i<n;i++){
         for(j=0;j<n-1;j++){
@@ -21,7 +21,7 @@ int main(){
         printf("%d ",arr[i]);
     }
     printf("\n");
-    insertionsort(arr,n);
+    bubblesort(arr,n);
     printf("Sorted array: \n");
     for(int i=0;i<n;i++){
         printf("%d ",arr[i]);
