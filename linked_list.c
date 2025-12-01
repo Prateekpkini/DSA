@@ -1,69 +1,14 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 struct Node{
     int data;
     struct Node* next;
 };
+
 struct Node* head = NULL;
 struct Node* tail = NULL;
 
-void insert_beginning(int value) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = value;
-    newNode->next = head;
-    head = newNode;
-    if (tail == NULL) { // If the list was empty
-        tail = newNode;
-    }
-    printf("Inserted %d at the beginning of the linked list\n", value);
-}
-
-void delete(int value) {
-    struct Node* current = head;
-    struct Node* prev = NULL;
-
-    // If the list is empty
-    if (head == NULL) {
-        printf("Linked List is empty. Cannot delete.\n");
-        return;
-    }
-
-    // Case 1: The node to be deleted is the head
-    if (current != NULL && current->data == value) {
-        head = current->next;
-        // If the list becomes empty after deletion
-        if (head == NULL) {
-            tail = NULL;
-        }
-        free(current);
-        printf("Deleted %d from the linked list\n", value);
-        return;
-    }
-
-    // Case 2 & 3: The node is in the middle or at the end
-    while (current != NULL && current->data != value) {
-        prev = current;
-        current = current->next;
-    }
-
-    // If the value was not found in the list
-    if (current == NULL) {
-        printf("Value %d not found in the linked list\n", value);
-        return;
-    }
-
-    // Unlink the node from the linked list
-    prev->next = current->next;
-
-    // If the deleted node was the tail
-    if (current == tail) {
-        tail = prev;
-    }
-
-    free(current);
-    printf("Deleted %d from the linked list\n", value);
-}
-//Accountno:2999201005001,IFSC:CNRB0002999 
 void insert(int value){
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
@@ -76,7 +21,36 @@ void insert(int value){
         tail = newNode;
     }
     printf("Inserted %d into the linked list\n", value);
-}       
+}
+
+void insert_beg(int value){
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+    if (tail == NULL){
+        tail = newNode;
+    }
+    printf("Inserted %d at the beginning of the linked list\n", value);
+}
+
+void insert_end(int value){
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if(head == NULL){
+        head = newNode;
+        tail = newNode;
+    } else {
+        tail->next = newNode;
+        tail = newNode;
+    }
+
+    printf("Inserted %d at the end of the linked list\n", value);
+}
+
+
 void display(){
     struct Node* current = head;
     if(current == NULL){
@@ -90,21 +64,56 @@ void display(){
     }
     printf("\n");
 }
+
+void delete(){
+    if (head == NULL){
+        printf("List is empty — nothing to delete\n");
+        return;
+    }
+    if (head == tail){
+        printf("Deleted %d from the linked list\n", head->data);
+        free(head);
+        head = NULL;
+        tail = NULL;
+        return;
+    }
+    struct Node* current = head;
+    while (current->next != tail){
+        current = current->next;
+    }
+    printf("Deleted %d from the linked list\n", tail->data);
+    free(tail);
+    tail = current;
+    tail->next = NULL;
+}
+
+// void free_list(){
+//     struct Node* cur = head;
+//     while(cur != NULL){
+//         struct Node* next = cur->next;
+//         free(cur);
+//         cur = next;
+//     }
+//     head = tail = NULL;
+// }
+
 int main(){
     insert(10);
     insert(20);
-    insert(30);
     display();
-    insert_beginning(5);
+    insert_end(30);
+    insert_end(40);
     display();
-    delete(20);
+
+    insert_beg(5);
     display();
-    delete(5);
+    delete();
     display();
-    delete(30);
     display();
-    delete(10);
+    delete();
+    delete();
+    delete();
+    delete();
     display();
-    delete(10);
     return 0;
 }
