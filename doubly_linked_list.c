@@ -22,6 +22,34 @@ void insert(int value){
         tail=newNode;
     }
 }
+void insert_beg(int value){
+    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data=value;
+    newNode->next=head;
+    newNode->prev=NULL;
+    if(head!=NULL){
+        head->prev=newNode;
+    }
+    head=newNode;
+    if(tail==NULL){
+        tail=newNode;
+    }
+}
+void insert_end(int value){
+    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data=value;
+    newNode->next=NULL;
+    newNode->prev=tail;
+    if(tail!=NULL){
+        tail->next=newNode;
+    }
+    tail=newNode;
+    if(head==NULL){
+        head=newNode;
+    }
+}
+
+
 void display(){
     struct Node* current=head;
     if(current==NULL){
@@ -38,6 +66,8 @@ int main(){
     insert(10);
     insert(20);
     insert(30);
+    insert_beg(5);
+    insert_end(40);
     display();
     return 0;
 }
