@@ -39,7 +39,6 @@ void inorderTraversal(struct Node* node){
 
 
 int main(){
-    return 0;
     insert(&root,10);
     insert(&root,5);
     insert(&root,15);
